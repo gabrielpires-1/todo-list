@@ -2,7 +2,8 @@
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "name" TEXT,
+    "name" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -11,7 +12,7 @@ CREATE TABLE "User" (
 CREATE TABLE "Task" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
-    "cost" DOUBLE PRECISION NOT NULL,
+    "difficulty" DOUBLE PRECISION NOT NULL,
     "deadline" TIMESTAMP(3) NOT NULL,
     "order" INTEGER NOT NULL,
     "userId" TEXT NOT NULL,

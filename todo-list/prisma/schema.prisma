@@ -22,11 +22,11 @@ model User {
 }
 
 model Task {
-  id        String      @default(uuid()) @id
-  title     String
-  cost      Float
-  deadline  DateTime
-  order     Int
-  userId    String
-  user      User    @relation(fields: [userId], references: [id])
+  id          String      @default(uuid()) @id
+  title       String
+  difficulty  Int   // 0 a 10
+  deadline    DateTime
+  order       Int
+  userId      String
+  user        User    @relation(fields: [userId], references: [id])
 }
