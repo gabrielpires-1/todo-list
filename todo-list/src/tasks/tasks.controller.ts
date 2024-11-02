@@ -21,17 +21,18 @@ export class TasksController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return await this.tasksService.findOne(id);
+  async findOne(@Param('id') id: string, @Req() req) {
+    return await this.tasksService.findOne(id, req.userid);
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
+  async update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto, @Req() req) {
+    updateTaskDto = { ...updateTaskDto, userId: req.userid };
     return await this.tasksService.update(id, updateTaskDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return await this.tasksService.remove(id);
+  async remove(@Param('id') id: string, @Req() req) {
+    return await this.tasksService.remove(id, req.userid);
   }
 }

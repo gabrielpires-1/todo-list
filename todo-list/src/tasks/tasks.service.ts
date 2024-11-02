@@ -31,12 +31,12 @@ export class TasksService {
     });
   }
 
-  async findOne(id: string) {
+  async findOne(id: string, userId: string) {
     const task = await this.prisma.task.findUnique({
       where: { id },
     });
 
-    if (!task) {
+    if (!task || task.userId !== userId) {
       throw new NotFoundException(`Task with ID ${id} not found`);
     }
 
@@ -48,7 +48,7 @@ export class TasksService {
       where: { id },
     });
 
-    if (!task) {
+    if (!task || updateTaskDto.userId !== task.userId) {
       throw new NotFoundException(`Task with ID ${id} not found`);
     }
 
@@ -58,12 +58,12 @@ export class TasksService {
     });
   }
 
-  async remove(id: string) {
+  async remove(id: string, userId: string) {
     const task = await this.prisma.task.findUnique({
       where: { id },
     });
 
-    if (!task) {
+    if (!task || task.userId !== userId) {
       throw new NotFoundException(`Task with ID ${id} not found`);
     }
 
