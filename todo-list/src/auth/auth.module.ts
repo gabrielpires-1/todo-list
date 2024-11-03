@@ -10,7 +10,7 @@ import { UsersModule } from 'src/users/users.module';
       global: true,
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '24h' },
-    }), 
+    }),
     UsersModule,
   ],
   controllers: [AuthController],

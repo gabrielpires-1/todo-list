@@ -1,4 +1,9 @@
-import { ConflictException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/prisma.service';
@@ -7,9 +12,7 @@ import { useContainer } from 'class-validator';
 
 @Injectable()
 export class UsersService {
-  constructor(
-    private readonly prisma: PrismaService,
-  ) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   async findByEmail(email: string) {
     return await this.prisma.user.findUnique({
@@ -37,7 +40,7 @@ export class UsersService {
         id: user.id,
         email: user.email,
         name: user.name,
-      }
+      };
     } catch (error) {
       if (error.code === 'P2002') {
         throw new ConflictException('Usuário já cadastrado');

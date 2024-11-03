@@ -7,7 +7,10 @@ import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UsersService, private jwtService: JwtService) { }
+  constructor(
+    private usersService: UsersService,
+    private jwtService: JwtService,
+  ) {}
 
   async signIn(loginDto: LoginDto) {
     const user = await this.usersService.findByEmail(loginDto.email);
@@ -16,7 +19,10 @@ export class AuthService {
       throw new NotFoundException('Usuário ou senha inválidos');
     }
 
-    const isPasswordValid = await bcrypt.compare(loginDto.password, user.password);
+    const isPasswordValid = await bcrypt.compare(
+      loginDto.password,
+      user.password,
+    );
 
     if (!isPasswordValid) {
       throw new NotFoundException('Usuário ou senha inválidos');
@@ -33,7 +39,7 @@ export class AuthService {
 
   async signUp(createUserDto: CreateUserDto) {
     const user = await this.usersService.create({
-      ...createUserDto
+      ...createUserDto,
     });
 
     const payload = { email: user.email, userid: user.id, name: user.name };
@@ -41,7 +47,7 @@ export class AuthService {
     const token = await this.jwtService.signAsync(payload);
 
     return {
-      token: token
+      token: token,
     };
   }
 }

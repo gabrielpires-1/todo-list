@@ -1,20 +1,28 @@
-import { IsString, IsNumber, IsDate, IsInt, Min, Max, IsUUID } from 'class-validator';
+import {
+  IsString,
+  IsNumber,
+  IsDate,
+  IsInt,
+  Min,
+  Max,
+  IsUUID,
+} from 'class-validator';
 
 export class CreateTaskDto {
-    @IsString()
-    title: string;
+  @IsString()
+  title: string;
 
-    @IsNumber()
-    @Min(0)
-    @Max(10)
-    difficulty: number;
+  @IsNumber()
+  @Min(0)
+  @Max(10)
+  difficulty: number;
 
-    @IsDate()
-    deadline: Date;
+  @IsDate()
+  deadline: Date;
 
-    @IsInt()
-    order: number;
+  @IsInt()
+  order: number;
 
-    @IsUUID()
-    userId: string;
+  @IsUUID()
+  userId: string;
 }
